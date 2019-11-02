@@ -1,6 +1,6 @@
 {
-    "name": "voterContract",
-    "version": "7.0.0",
+    "name": "RandomHack",
+    "version": "0.0.1",
     "description": "My Smart Contract",
     "main": "index.js",
     "engines": {
@@ -8,6 +8,8 @@
         "npm": ">=5"
     },
     "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
         "test": "nyc mocha --recursive",
         "start": "fabric-chaincode-node start"
     },
@@ -15,18 +17,16 @@
     "author": "John Doe",
     "license": "Apache-2.0",
     "dependencies": {
-        "fabric-contract-api": "1.4.1",
-        "fabric-shim": "^1.4.1",
-        "mem": "^5.1.1",
-        "os-locale": "^4.0.0"
+        "fabric-contract-api": "1.4.2",
+        "fabric-shim": "1.4.2"
     },
     "devDependencies": {
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",
-        "eslint": "^6.0.1",
-        "mocha": "^6.1.4",
+        "eslint": "^6.3.0",
+        "mocha": "^6.2.0",
         "nyc": "^14.1.1",
-        "sinon": "^7.3.2",
+        "sinon": "^7.4.1",
         "sinon-chai": "^3.3.0",
         "winston": "^3.2.1"
     },
