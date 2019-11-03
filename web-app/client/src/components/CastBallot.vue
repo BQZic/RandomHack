@@ -79,7 +79,7 @@ export default {
       console.log(this.picked);
       console.log("number: ");
       console.log(this.input.donateNum);
-      console.log("voterId: ");
+      console.log("DonatorId: ");
       console.log(this.input.voterId);
       this.response = null;
 
@@ -98,7 +98,7 @@ export default {
         this.response = response;
         await this.hideSpinner();
       }else if (this.input.voterId === undefined) {
-        console.log('this.voterId === undefined')
+        console.log('this.DonatorId === undefined')
 
         let response = "You have to enter your DonatorId to donate an item!";
         this.response = response;

@@ -14,10 +14,6 @@ const electionDataPath = path.join(process.cwd(), './lib/data/electionData.json'
 const electionDataJson = fs.readFileSync(electionDataPath, 'utf8');
 const electionData = JSON.parse(electionDataJson);
 
-// connect to the pres election file
-const ballotDataPath = path.join(process.cwd(), './lib/data/presElection.json');
-const ballotDataJson = fs.readFileSync(ballotDataPath, 'utf8');
-const ballotData = JSON.parse(ballotDataJson);
 
 //import our file which contains our constructors and auxiliary function
 let Ballot = require('./Ballot.js');
