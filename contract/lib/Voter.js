@@ -34,7 +34,7 @@ class Voter {
       return this;
 
     } else if (!this.validateVoter(voterId)){
-      throw new Error('the voterId is not valid.');
+      throw new Error('the donateId is not valid.');
     } else {
       throw new Error('the registrarId is not valid.');
     }
