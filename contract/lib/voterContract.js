@@ -47,7 +47,7 @@ class MyAssetContract extends Contract {
 
     //update voters array
     voters.push(voter1);
-    voters.push(voter2);
+    //voters.push(voter2);
 
     //add the voters to the world state, the election class checks for registered voters 
     await ctx.stub.putState(voter1.voterId, Buffer.from(JSON.stringify(voter1)));
