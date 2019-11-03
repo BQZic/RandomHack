@@ -282,7 +282,7 @@ class MyAssetContract extends Contract {
 
       if (voter.ballotCast) {
         let response = {};
-        response.error = 'this voter has already cast this ballot!';
+        response.error = 'this Item has already added!';
         return response;
       }
 
