@@ -1,8 +1,8 @@
 <template>
   <div class="posts">
-    <h1>Get the Current Poll Standings</h1>
+    <h1>Get the Current Donations situation</h1>
 
-    <button v-on:click="getCurrentStanding()">Check Poll</button>
+    <button v-on:click="getCurrentStanding()">Check Donations</button>
 
     <br>
     <span v-if="response">
@@ -54,11 +54,12 @@ export default {
       this.chartOptionsBar = {
         xAxis: {
           data: [
-            "Democrat",
-            "Green",
-            "Independent",
-            "Libertarian",
-            "Republican"
+            "Water",
+            "Food",
+            "First aid kit",
+            "Tent",
+            "Clothes",
+            "Other"
           ]
         },
         yAxis: {

@@ -1,12 +1,12 @@
 <template>
   <div class="posts">
-    <h1>Select the type of object to query for</h1>
+    <h1>Select the type of supply to query for</h1>
     <select v-model="selected">
       <option disabled value>Please select one</option>
       <option>ballot</option>
       <option>election</option>
-      <option>votableItem</option>
-      <option>voter</option>
+      <option>donatableItem</option>
+      <option>donator</option>
     </select>
     <br>
 
@@ -49,7 +49,7 @@ export default {
  
       //check to make sure the user selected something
       if (this.selected != 'ballot' && this.selected != 'election' 
-        && this.selected!= 'voter' && this.selected != 'votableItem') {
+        && this.selected!= 'donator' && this.selected != 'donatableItem') {
 
         console.log('this . selectionesdfsdfds')
         let result = `Please select a type of object!`;
