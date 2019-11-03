@@ -51,7 +51,7 @@ class MyAssetContract extends Contract {
 
     //add the voters to the world state, the election class checks for registered voters 
     await ctx.stub.putState(voter1.voterId, Buffer.from(JSON.stringify(voter1)));
-    await ctx.stub.putState(voter2.voterId, Buffer.from(JSON.stringify(voter2)));
+    //await ctx.stub.putState(voter2.voterId, Buffer.from(JSON.stringify(voter2)));
 
     //query for election first before creating one.
     let currElections = JSON.parse(await this.queryByObjectType(ctx, 'election'));
