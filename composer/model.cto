@@ -1,0 +1,22 @@
+namespace org.donationtracker
+
+asset Storage identified by storageId{
+	o String storageId
+    o String location
+    --> Item[] item
+}
+
+asset Item identified by id{
+	o String id
+   	--> User user
+    o String description
+}
+
+participant User identified by name{
+	o String name
+}
+
+transaction donate{
+	--> Item item
+    --> Storage storage
+}
