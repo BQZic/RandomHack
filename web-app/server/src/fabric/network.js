@@ -41,11 +41,11 @@ exports.connectToNetwork = async function (userName) {
     // userName = 'V123412';
     const userExists = await wallet.exists(userName);
     if (!userExists) {
-		console.log('An identity for the user ' + userName + ' does not exist in the wallet');
-		console.log('Run the registerUser.js application before retrying');
-		let response = {};
-		response.error = 'An identity for the user ' + userName + ' does not exist in the wallet. Register ' + userName + ' first';
-		return response;
+      console.log('An identity for the user ' + userName + ' does not exist in the wallet');
+      console.log('Run the registerUser.js application before retrying');
+      let response = {};
+      response.error = 'An identity for the user ' + userName + ' does not exist in the wallet. Register ' + userName + ' first';
+      return response;
     }
 
     console.log('before gateway.connect: ');
@@ -57,13 +57,13 @@ exports.connectToNetwork = async function (userName) {
 
     console.log('Connected to mychannel. ');
     // Get the contract we have installed on the peer
-    const contract = await network.getContract('my-asset-contract.js');
+    const contract = await network.getContract('voterContract');
 
 
     let networkObj = {
-		contract: contract,
-		network: network,
-		gateway: gateway
+      contract: contract,
+      network: network,
+      gateway: gateway
     };
 
     return networkObj;
@@ -158,73 +158,71 @@ exports.invoke = async function (networkObj, isQuery, func, args) {
   }
 };
 
+exports.registerVoter = async function (voterId, registrarId, firstName, lastName) {
 
-exports.registerUser = async function(userId, location, firstName, lastName) {
-	console.log('userId ');
-	console.log(userId);
+  console.log('registrarId');
+  console.log(registrarId);
 
-	console.log('location');
-	console.log(location);
+  console.log('voterId ');
+  console.log(voterId);
 
-	if (!userId || !location || !firstName || !lastName) {
-		let response = {};
-		response.error = 'Error! You need to fill all fields before you can register!';
-		return response;
-	}
+  if (!registrarId || !voterId || !firstName || !lastName) {
+    let response = {};
+    response.error = 'Error! You need to fill all fields before you can register!';
+    return response;
+  }
 
-	try {
-		const walletPath = path.join(process.cwd(), 'wallet');
-		const wallet = new FileSystemWallet(walletPath);
-		console.log(`Wallet path: ${walletPath}`);
-		console.log(wallet);
+  try {
 
-		// Check to see if we've already enrolled the user.
-		const userExists = await wallet.exists(userId);
-		if (userExists) {
-			let response = {};
-			console.log(`An identity for the user ${userId} already exists in the wallet`);
-			response.error = `Error! An identity for the user ${userId} already exists in the wallet. Please enter
-				a different license number.`;
-			return response;
-		}
+    // Create a new file system based wallet for managing identities.
+    const walletPath = path.join(process.cwd(), 'wallet');
+    const wallet = new FileSystemWallet(walletPath);
+    console.log(`Wallet path: ${walletPath}`);
+    console.log(wallet);
 
-		// Check to see if we've already enrolled the admin user.
-		const adminExists = await wallet.exists(appAdmin);
-		if (!adminExists) {
-			console.log(`An identity for the admin user ${appAdmin} does not exist in the wallet`);
-			console.log('Run the enrollAdmin.js application before retrying');
-			let response = {};
-			response.error = `An identity for the admin user ${appAdmin} does not exist in the wallet. 
-				Run the enrollAdmin.js application before retrying`;
-			return response;
-		}
+    // Check to see if we've already enrolled the user.
+    const userExists = await wallet.exists(voterId);
+    if (userExists) {
+      let response = {};
+      console.log(`An identity for the user ${voterId} already exists in the wallet`);
+      response.error = `Error! An identity for the user ${voterId} already exists in the wallet. Please enter
+        a different license number.`;
+      return response;
+    }
 
-		const gateway = new Gateway();
-		await gateway.connect(ccp, { wallet, identity: appAdmin, discovery: gatewayDiscovery });
+    // Check to see if we've already enrolled the admin user.
+    const adminExists = await wallet.exists(appAdmin);
+    if (!adminExists) {
+      console.log(`An identity for the admin user ${appAdmin} does not exist in the wallet`);
+      console.log('Run the enrollAdmin.js application before retrying');
+      let response = {};
+      response.error = `An identity for the admin user ${appAdmin} does not exist in the wallet. 
+        Run the enrollAdmin.js application before retrying`;
+      return response;
+    }
 
-		// Get the CA client object from the gateway for interacting with the CA.
-		const ca = gateway.getClient().getCertificateAuthority();
-		const adminIdentity = gateway.getCurrentIdentity();
-		console.log(`AdminIdentity: + ${adminIdentity}`);
+    // Create a new gateway for connecting to our peer node.
+    const gateway = new Gateway();
+    await gateway.connect(ccp, { wallet, identity: appAdmin, discovery: gatewayDiscovery });
 
-		// Register the user, enroll the user, and import the new identity into the wallet.
-		const secret = await ca.register({ affiliation: 'org1', enrollmentID: userId, role: 'client' }, adminIdentity);
+    // Get the CA client object from the gateway for interacting with the CA.
+    const ca = gateway.getClient().getCertificateAuthority();
+    const adminIdentity = gateway.getCurrentIdentity();
+    console.log(`AdminIdentity: + ${adminIdentity}`);
 
-		const enrollment = await ca.enroll({ enrollmentID: userId, enrollmentSecret: secret });
-		const userIdentity = await X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
-		await wallet.import(userId, userIdentity);
-		console.log(`Successfully registered user ${firstName} ${lastName}. Use userId ${userId} to login above.`);
-		let response = `Successfully registered user ${firstName} ${lastName}. Use userId ${userId} to login above.`;
-		return response;
-	} catch (error) {
-		console.error(`Failed to register user + ${userId} + : ${error}`);
-		let response = {};
-		response.error = error;
-		return response;
-	}
+    // Register the user, enroll the user, and import the new identity into the wallet.
+    const secret = await ca.register({ affiliation: 'org1', enrollmentID: voterId, role: 'client' }, adminIdentity);
 
-
-
+    const enrollment = await ca.enroll({ enrollmentID: voterId, enrollmentSecret: secret });
+    const userIdentity = await X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
+    await wallet.import(voterId, userIdentity);
+    console.log(`Successfully registered voter ${firstName} ${lastName}. Use voterId ${voterId} to login above.`);
+    let response = `Successfully registered voter ${firstName} ${lastName}. Use voterId ${voterId} to login above.`;
+    return response;
+  } catch (error) {
+    console.error(`Failed to register user + ${voterId} + : ${error}`);
+    let response = {};
+    response.error = error;
+    return response;
+  }
 };
-
-

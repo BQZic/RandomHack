@@ -1,10 +1,11 @@
 <template>
   <div class="posts">
     <h1>Donation Tracker</h1>
-    <h3>If you are a registered donator, enter your userId(Drivers License) below</h3>
+    <h3>If you are a registered donator,</h3>
+    <h3>enter your DonatorId (your Drivers License) below</h3>
     <!--span><b>{{ response }}</b></span><br /-->
-    <form v-on:submit="validateUser">
-      <input type="text" v-model="loginData.userId" placeholder="Enter userId">
+    <form v-on:submit="validateVoter">
+      <input type="text" v-model="loginData.voterId" placeholder="Enter DonatorId">
       <br>
 
       <input type="submit" value="Login">
@@ -18,10 +19,23 @@
 
     <br>
     <h3>Otherwise, fill out the form below to register!</h3>
-    <form v-on:submit="registerUser">
-      <input type="text" v-model="registerData.userId" placeholder="Enter Drivers License">
+    <form v-on:submit="registerVoter">
+      <input type="text" v-model="registerData.voterId" placeholder="Enter Drivers License">
       <br>
-      <input type="text" v-model="registerData.location" placeholder="Enter State you're in">
+      <!--<input type="text" v-model="registerData.registrarId" placeholder="Location">
+      <br>-->
+      <span> Select your location:</span><br>
+      <select v-model="registerData.registrarId" placeholder="Enter Location">
+      <option disabled value="">Please select one</option>
+      <option>The North</option>
+      <option>The Mountain and The Vale</option>
+      <option>The Isles and Rivers</option>
+      <option>The Rock</option>
+      <option>The Stormlands</option>
+      <option>The Reach</option>
+      <option>The Dorne</option>
+      </select>
+      <!--<span> Selected: {{ registerData.registrarId }}</span>-->
       <br>
       <input type="text" v-model="registerData.firstName" placeholder="Enter first name">
       <br>
@@ -60,12 +74,12 @@ export default {
     VueInstantLoadingSpinner
   },
   methods: {
-    async registerUser() {
+    async registerVoter() {
 
       await this.runSpinner();
-      const apiResponse = await PostsService.registerUser(
-        this.registerData.userId,
-        this.registerData.location,
+      const apiResponse = await PostsService.registerVoter(
+        this.registerData.voterId,
+        this.registerData.registrarId,
         this.registerData.firstName,
         this.registerData.lastName
       );
@@ -75,17 +89,17 @@ export default {
       await this.hideSpinner();
     },
 
-    async validateUser() {
+    async validateVoter() {
       await this.runSpinner();
 
-      if (!this.loginData.userId) {
+      if (!this.loginData.voterId) {
         console.log("!thislogin");
-        let response = 'Please enter a userId';
+        let response = 'Please enter a VoterId';
         this.loginReponse.data = response;
         await this.hideSpinner();
       } else {
-        const apiResponse = await PostsService.validateUser(
-          this.loginData.userId
+        const apiResponse = await PostsService.validateVoter(
+          this.loginData.voterId
         );
         console.log("apiResponse");
         console.log(apiResponse.data);
@@ -95,7 +109,7 @@ export default {
           console.log(apiResponse.data.error);
           this.loginReponse = apiResponse.data.error;
         } else {
-          //this.$router.push("castBallot");
+          this.$router.push("castBallot");
         }
 
         console.log(apiResponse);

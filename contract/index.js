@@ -4,7 +4,13 @@
 
 'use strict';
 
-const MyAssetContract = require('./lib/my-asset-contract');
+const MyAssetContract = require('./lib/voterContract.js');
+// const MyQueryContract = require('./lib/query.js');
 
 module.exports.MyAssetContract = MyAssetContract;
-module.exports.contracts = [ MyAssetContract ];
+// module.exports.MyQueryContract = MyQueryContract;
+
+module.exports.contracts = [ MyAssetContract];
+
+
+

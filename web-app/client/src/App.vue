@@ -1,7 +1,14 @@
 <template>
-  <div id="app">      
-      <img alt="Vue logo" src="./assets/logo2.png">  
-        <p><router-link to="/">Home</router-link>&nbsp;</p>          
+  <div id="app">
+    <img alt="Vue logo" src="./assets/logo2.png">    
+      
+        <p><router-link to="/">Home</router-link>&nbsp;          
+        <!-- <router-link to="/castBallot">Cast Ballot</router-link>&nbsp; -->
+        <router-link to="/QueryAll">Show All Donations</router-link></p>
+        <router-link to="/queryWithQueryString">Donations by Type</router-link>&nbsp;
+        <router-link to="/queryByKey">Show Donations by Key</router-link>&nbsp;
+        <router-link to="/getCurrentStanding">Donations Charts</router-link>&nbsp;
+      
       <router-view></router-view>
     </div>
 </template>
@@ -22,9 +29,22 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.chart-wrapper {
+  width: 100%;
+  height: 700px;
+}
+.echarts {
+  width: 100%;
+  height: 100%;
+}
+
 #loader {
   position:fixed;
   padding-top: 250px;
 }
 
+.chart-wrapper {
+  position:fixed;
+  padding-left:32%;
+}
 </style>
