@@ -20,9 +20,7 @@ const walletPath = path.join(process.cwd(), './wallet');
 const wallet = new FileSystemWallet(walletPath);
 console.log(`Wallet path: ${walletPath}`);
 
-
-// ????????????????
-const peerIdentity = 'voterApp-admin'; 
+const peerIdentity = 'voterApp-admin';
 
 async function queryAll() {
   
@@ -47,8 +45,6 @@ async function queryAll() {
 
     //connect to our channel that has been created on IBM Blockchain Platform
     const network = await gateway.getNetwork('mychannel');
-
-    // ????????????????
 
     //connect to our insurance contract that has been installed / instantiated on IBM Blockchain Platform
     const contract = await network.getContract('voteChainDemo'); 
