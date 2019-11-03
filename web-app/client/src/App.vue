@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo2.png">    
+    <img alt="Vue logo" src="./assets/logo3.png" height="350px" width="650px">    
       
         <p><router-link to="/">Home</router-link>&nbsp;          
         <!-- <router-link to="/castBallot">Cast Ballot</router-link>&nbsp; -->
