@@ -1,5 +1,7 @@
 'use strict';
 
+// one time donation
+
 class Ballot {
 
   /**

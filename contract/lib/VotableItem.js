@@ -1,6 +1,8 @@
 /* eslint-disable indent */
 'use strict';
 
+// Item
+
 class VotableItem {
 
     /**
