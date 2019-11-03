@@ -110,7 +110,7 @@ class MyAssetContract extends Contract {
         await this.generateBallot(ctx, votableItems, election, voters[i]);
 
       } else {
-        console.log('these voters already have ballots');
+        console.log('these Item already exist');
         break;
       }
 
@@ -188,7 +188,7 @@ class MyAssetContract extends Contract {
     //generate ballot with the given votableItems
     await this.generateBallot(ctx, votableItems, currElection, newVoter);
 
-    let response = `voter with voterId ${newVoter.voterId} is updated in the world state`;
+    let response = `donator with donatorId ${newVoter.voterId} is updated in the world state`;
     return response;
   }
 
@@ -307,7 +307,7 @@ class MyAssetContract extends Contract {
         let votableExists = await this.myAssetExists(ctx, votableId);
         if (!votableExists) {
           let response = {};
-          response.error = 'VotableId does not exist!';
+          response.error = 'Item type does not exist!';
           return response;
         }
 
@@ -334,13 +334,13 @@ class MyAssetContract extends Contract {
 
       } else {
         let response = {};
-        response.error = 'the election is not open now!';
+        response.error = 'the Item does not exist';
         return response;
       }
 
     } else {
       let response = {};
-      response.error = 'the election or the voter does not exist!';
+      response.error = 'the Item does not exist!';
       return response;
     }
   }
