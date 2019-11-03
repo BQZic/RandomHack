@@ -81,12 +81,12 @@ app.post('/registerVoter', async (req, res) => {
 
   //first create the identity for the voter and add to wallet
   let response = await network.registerVoter(voterId, req.body.registrarId, req.body.firstName, req.body.lastName);
-  console.log('response from registerVoter: ');
+  console.log('response from registerDonator: ');
   console.log(response);
   if (response.error) {
     res.send(response.error);
   } else {
-    console.log('req.body.voterId');
+    console.log('req.body.donatorId');
     console.log(req.body.voterId);
     let networkObj = await network.connectToNetwork(voterId);
     console.log('networkobj: ');
@@ -111,7 +111,7 @@ app.post('/registerVoter', async (req, res) => {
 
       console.log('after network.invoke ');
       let parsedResponse = JSON.parse(invokeResponse);
-      parsedResponse += '. Use voterId to login above.';
+      parsedResponse += '. Use DonatorId to login above.';
       res.send(parsedResponse);
 
     }
@@ -141,7 +141,7 @@ app.post('/validateVoter', async (req, res) => {
     let parsedResponse = await JSON.parse(invokeResponse);
     if (parsedResponse.ballotCast) {
       let response = {};
-      response.error = 'This voter has already cast a ballot, we cannot allow double-voting!';
+      response.error = '!!This voter has already cast a ballot, we cannot allow double-voting!';
       res.send(response);
     }
     // let response = `Voter with voterId ${parsedResponse.voterId} is ready to cast a ballot.`  

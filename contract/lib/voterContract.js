@@ -312,7 +312,7 @@ class MyAssetContract extends Contract {
         console.log(result);
 
         //make sure this voter cannot vote again! 
-        voter.ballotCast = true;
+        //voter.ballotCast = true;
         voter.picked = {};
         voter.picked = args.picked;
 
