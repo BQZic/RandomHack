@@ -80,19 +80,12 @@ class MyAssetContract extends Contract {
       election = currElections[0];
     }
 
-    //create votableItems for the ballots
-    let repVotable = await new VotableItem(ctx, 'Water', ballotData.fedDemocratBrief);
-    let demVotable = await new VotableItem(ctx, 'Democrat', ballotData.republicanBrief);
-    let indVotable = await new VotableItem(ctx, 'Green', ballotData.greenBrief);
-    let grnVotable = await new VotableItem(ctx, 'Independent', ballotData.independentBrief);
-    let libVotable = await new VotableItem(ctx, 'Libertarian', ballotData.libertarianBrief);
+    const items = ['Water', 'Food', 'First aid kit', 'Tent', 'Clothes', 'Other'];
 
-    //populate choices array so that the ballots can have all of these choices 
-    votableItems.push(repVotable);
-    votableItems.push(demVotable);
-    votableItems.push(indVotable);
-    votableItems.push(grnVotable);
-    votableItems.push(libVotable);
+    for(let i = 0; i < items.length; i++){
+      let item = await new VotableItem(ctx, items[i], items[i]);
+      votableItems.push(item);
+    }
 
     for (let i = 0; i < votableItems.length; i++) {
     

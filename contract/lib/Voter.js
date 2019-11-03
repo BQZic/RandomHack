@@ -1,5 +1,7 @@
 'use strict';
 
+// Donator
+
 class Voter {
   /**
    *
