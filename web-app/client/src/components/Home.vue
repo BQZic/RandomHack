@@ -94,7 +94,7 @@ export default {
 
       if (!this.loginData.voterId) {
         console.log("!thislogin");
-        let response = 'Please enter a VoterId';
+        let response = 'Please enter a DonatorId';
         this.loginReponse.data = response;
         await this.hideSpinner();
       } else {
