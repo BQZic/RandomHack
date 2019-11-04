@@ -6,10 +6,10 @@ DoT (Donation Tracker) is a web application using IBM blockchain platform and hy
 We use two tools to develop our project. The first tool we used is hyperledger composer, but we found that it's not under maintenance. So we tried the second tool which is hyperledger fabric and IBM blockchain platform. Basically, we built our web app based on IBM evote case, and adapted it to our project. 
 
 ## Developers
-Fan Bu
-Beiqi Zou https://github.com/BQZic
-Yifan Li https://github.com/lyffreya
-Canshi Wei https://github.com/canshiwei
+Fan Bu<br/>
+Beiqi Zou https://github.com/BQZic<br/>
+Yifan Li https://github.com/lyffreya<br/>
+Canshi Wei https://github.com/canshiwei<br/>
 
 ## References
 1. https://github.com/IBM/evote/tree/e0886cd1b3e5c4d1e6be304f1ebe198cbe856459
