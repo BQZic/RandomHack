@@ -18,7 +18,7 @@
         "eslint-utils": "^1.4.3",
         "fabric-contract-api": "1.4.1",
         "fabric-shim": "^1.4.1",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "mem": "^5.1.1",
         "os-locale": "^4.0.0"
     },
